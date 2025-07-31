@@ -6,38 +6,34 @@ TikTok, Instagram, Shein, Youtube(미개발) 등에서 데이터를 수집하는
 
 ## 📦 환경 세팅
 
-본 프로젝트는 Anaconda 환경을 사용합니다.
+본 프로젝트는 Python 3.10 이상에서 동작합니다.
 
-### 1. Conda 환경 생성 (Python 3.10.18 버전)
+### 1. Conda 환경 생성
 
-아래 명령어로 환경을 생성하세요.
+아래 명령어로 새 conda 환경을 생성하세요.
 
 ```bash
-conda env create -f environment.yml
+conda create -n influencer-crawler python=3.10
 ```
 
 ### 2. 환경 활성화
 
-생성한 conda 환경을 아래 명령어로 활성화합니다.
-
 ```bash
-conda activate douyin-crawler
+conda activate influencer-crawler
 ```
 
-### 3. 패키지 추가/변경 시 환경 업데이트
-
-`environment.yml`이 변경된 경우, 아래 명령어로 환경을 업데이트하세요.
+### 3. 패키지 설치
 
 ```bash
-conda env update -f environment.yml --prune
+pip install -r requirements.txt
 ```
 
-### 4. 환경 삭제 (원할 경우)
+### 4. 패키지 추가/변경 시
 
-환경을 완전히 삭제하려면 아래 명령어를 사용하세요.
+패키지를 새로 설치한 경우, 아래 명령어로 requirements.txt를 갱신하세요.
 
 ```bash
-conda env remove -n douyin-crawler
+pip freeze > requirements.txt
 ```
 
 ---
@@ -55,9 +51,8 @@ conda env remove -n douyin-crawler
 
 ## 📄 참고
 
--   `environment.yml` 파일에 설치 패키지와 Python 버전이 정의되어 있습니다.
--   환경 이름(`douyin-crawler`)이 다를 경우, `environment.yml`에서 `name:` 부분을 원하는 이름으로 수정할 수 있습니다.
--   추가적인 라이브러리가 필요하다면 `environment.yml`에 패키지를 추가한 뒤 환경을 업데이트하세요.
+-   `requirements.txt` 파일에 설치 패키지와 버전이 정의되어 있습니다.
+-   추가적인 라이브러리가 필요하다면 `requirements.txt`에 패키지를 추가한 뒤 패키지를 설치하거나 갱신하세요.
 
 ---
 
