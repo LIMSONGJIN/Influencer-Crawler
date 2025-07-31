@@ -1,6 +1,6 @@
 # Influencer-Crawler
 
-TikTok, Instagram, Shein 등에서 데이터를 수집하는 크롤러 프로젝트입니다.
+TikTok, Instagram, Shein, Youtube(미개발) 등에서 데이터를 수집하는 크롤러 프로젝트입니다.
 
 ---
 
