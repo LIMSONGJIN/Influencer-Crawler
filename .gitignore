@@ -9,6 +9,7 @@ __pycache__/
 # 환경/설정 파일
 *.env
 *.config
+*.json
 
 # Mac/VSCode
 .DS_Store
