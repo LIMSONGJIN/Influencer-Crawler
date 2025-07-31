@@ -1,0 +1,39 @@
+{
+  "platform": {
+    "name": "인플루언서 매칭",
+    "fullName": "인플루언서 매칭 플랫폼",
+    "description": "AI 기반 스마트 인플루언서-브랜드 매칭 플랫폼"
+  },
+  "navigation": {
+    "dashboard": "대시보드",
+    "campaigns": "캠페인",
+    "influencers": "인플루언서",
+    "chat": "채팅",
+    "analytics": "성과 분석",
+    "profile": "프로필",
+    "admin": "관리자"
+  },
+  "common": {
+    "save": "저장",
+    "cancel": "취소",
+    "edit": "편집",
+    "delete": "삭제",
+    "loading": "로딩 중...",
+    "search": "검색",
+    "filter": "필터",
+    "reset": "초기화",
+    "close": "닫기",
+    "submit": "제출",
+    "back": "뒤로",
+    "next": "다음",
+    "previous": "이전",
+    "more": "더보기"
+  },
+  "status": {
+    "active": "활성",
+    "inactive": "비활성",
+    "pending": "대기중",
+    "completed": "완료",
+    "cancelled": "취소됨"
+  }
+}

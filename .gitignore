@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+
+# Data files
+*.csv
+*.xlsx
+
+# 환경/설정 파일
+*.env
+*.config
+
+# Mac/VSCode
+.DS_Store
+.vscode/
+
+# Jupyter/Notebook (혹시 쓸 경우)
+*.ipynb_checkpoints/
+
+# 기타 캐시
+*.log
+
+# JSON 파일 중 민감 정보가 있다면 추가
+# 예: ig_cookies.json, ig_webinfo_fashion.json 등
+# *.json  # (이렇게 하면 모든 json 파일 무시됨. 필요시 개별 지정)
+
+# 예시로 특정 폴더 내 데이터 파일 무시하고 싶다면
+# Douyin/data/
