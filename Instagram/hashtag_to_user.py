@@ -1,12 +1,22 @@
+from datetime import datetime
+from pathlib import Path
+import argparse
 import requests
 import pandas as pd
 import time
 import json
 from urllib.parse import quote
 from cookie_getter import get_instagram_cookies
-import os
 from fake_useragent import UserAgent
 import random
+import os
+
+# 커맨드라인 인자로 저장 폴더 지정
+parser = argparse.ArgumentParser()
+parser.add_argument("--output-dir", type=str, default="results", help="저장할 디렉토리 (기본값: results)")
+args, unknown = parser.parse_known_args()
+OUTPUT_DIR = Path(args.output_dir)
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 USER_AGENTS = UserAgent()
 
@@ -77,7 +87,7 @@ def parse_post_node(node):
         'taken_at_timestamp': node.get('taken_at_timestamp')
     }
 
-def get_recent_posts_by_tag(tag, max_count=50):
+def get_recent_posts_by_tag(tag, max_count=50, output_dir=OUTPUT_DIR):
     posts = []
     tag_encoded = quote(tag)
     url = f"https://i.instagram.com/api/v1/tags/web_info/?tag_name={tag_encoded}"
@@ -90,8 +100,8 @@ def get_recent_posts_by_tag(tag, max_count=50):
                 return posts
             data = resp.json()
             print(f"[DEBUG] API 응답(일부): {str(data)[:300]}")
-            with open(f"ig_tag_{tag_encoded}_api_response.json", "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)    
+            with open(output_dir / f"ig_tag_{tag}_api_response.json", "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
             # 1차 시도: sections
             sections = data.get("data", {}).get("top", {}).get("sections", [])
             if not sections:
@@ -213,8 +223,8 @@ def extract_usernames_from_posts(posts):
 #
 #     return posts[:total_count]
 
-def fetch_recent_posts_rest_api(username, user_id, max_count=100, headers=None, base_dir="."):
-    import os, time, json
+def fetch_recent_posts_rest_api(username, user_id, max_count=100, headers=None, user_dir=None):
+    import time, json
     all_posts = []
     next_max_id = None
     for _ in range((max_count // 12) + 2):
@@ -237,13 +247,16 @@ def fetch_recent_posts_rest_api(username, user_id, max_count=100, headers=None, 
             print(f"[ERROR] 게시물 status_code: {resp.status_code}, message: {resp.text}")
             break
     all_posts = all_posts[:max_count]
-    posts_file_path = os.path.join(base_dir, f"ig_posts_{username}_max{max_count}.json")
+    if user_dir is not None:
+        posts_file_path = user_dir / f"ig_posts_{username}_max{max_count}.json"
+    else:
+        posts_file_path = OUTPUT_DIR / f"ig_posts_{username}_max{max_count}.json"
     with open(posts_file_path, "w", encoding="utf-8") as f:
         json.dump({"items": all_posts}, f, ensure_ascii=False, indent=2)
     print(f"최종 저장된 게시물 개수: {len(all_posts)}개")
     return all_posts
 
-def scrape_instagram_profile(username):
+def scrape_instagram_profile(username, user_dir=None):
     url = f"https://i.instagram.com/api/v1/users/web_profile_info/?username={username}"
     for attempt in range(3):
         try:
@@ -253,8 +266,12 @@ def scrape_instagram_profile(username):
                 print(f"[{username}] 프로필 수집 실패 (status: {resp.status_code})")
                 return None
             # ★ 추가: 전체 API 응답을 username별로 저장
-            with open(f"ig_profile_{username}_raw.json", "w", encoding="utf-8") as f:
-                json.dump(resp.json(), f, ensure_ascii=False, indent=2)
+            if user_dir is not None:
+                with open(user_dir / f"ig_profile_{username}_raw.json", "w", encoding="utf-8") as f:
+                    json.dump(resp.json(), f, ensure_ascii=False, indent=2)
+            else:
+                with open(OUTPUT_DIR / f"ig_profile_{username}_raw.json", "w", encoding="utf-8") as f:
+                    json.dump(resp.json(), f, ensure_ascii=False, indent=2)
             data = resp.json().get('data', {}).get('user', {})
 
             if not data:
@@ -281,7 +298,7 @@ def scrape_instagram_profile(username):
             if (not recent_posts) and user_id and (not profile_info['is_private']):
                 print(f"[{username}] REST API로 최근 게시물 fetch 시도 (최대 100개, i.instagram.com 방식)")
                 recent_posts_raw = fetch_recent_posts_rest_api(
-                    username, user_id, max_count=100, headers=HEADERS, base_dir="."
+                    username, user_id, max_count=100, headers=HEADERS, user_dir=user_dir
                 )
                 print(f"[DEBUG] {username} REST API recent_posts 개수: {len(recent_posts_raw)}")
                 # 필요 시 가공
@@ -369,8 +386,13 @@ def main():
     except:
         sleep_sec = 2.0
 
+    # 오늘 날짜와 카테고리로 폴더 구조 생성
+    today_str = datetime.now().strftime("%Y-%m-%d_%H_%M")
+    base_output_dir = OUTPUT_DIR / f"{today_str}_{category}"
+    base_output_dir.mkdir(parents=True, exist_ok=True)
+
     print(f"[INFO] 해시태그 #{category} 최신 게시물 {max_count}개 수집 중...")
-    posts = get_recent_posts_by_tag(category, max_count=max_count)
+    posts = get_recent_posts_by_tag(category, max_count=max_count, output_dir=base_output_dir)
     print(f"[INFO] 게시물 {len(posts)}개 수집")
 
     usernames = extract_usernames_from_posts(posts)
@@ -380,7 +402,9 @@ def main():
     recent_posts_json = {}
     for i, uname in enumerate(usernames, 1):
         print(f"[{i}/{len(usernames)}] {uname} 프로필 크롤링 중...")
-        profile = scrape_instagram_profile(uname)
+        user_dir = base_output_dir / uname
+        user_dir.mkdir(exist_ok=True)
+        profile = scrape_instagram_profile(uname, user_dir=user_dir)
         if profile:
             results.append(profile)
             recent_posts_json[uname] = profile.get('recent_posts_raw', [])
@@ -399,13 +423,13 @@ def main():
             if col not in df.columns:
                 df[col] = None
         df = df[columns]
-        df.to_csv(fname, index=False, encoding='utf-8-sig')
-        print(f"[INFO] {len(results)}개 계정 정보가 {fname}에 저장되었습니다.")
+        df.to_csv(base_output_dir / fname, index=False, encoding='utf-8-sig')
+        print(f"[INFO] {len(results)}개 계정 정보가 {(base_output_dir / fname)}에 저장되었습니다.")
 
         recent_posts_fname = f"insta_{category}_recent_posts_full.json"
-        with open(recent_posts_fname, "w", encoding="utf-8") as f:
+        with open(base_output_dir / recent_posts_fname, "w", encoding="utf-8") as f:
             json.dump(recent_posts_json, f, ensure_ascii=False, indent=2)
-        print(f"[INFO] 각 계정별 최근 게시물 원본 데이터가 {recent_posts_fname}에 저장되었습니다.")
+        print(f"[INFO] 각 계정별 최근 게시물 원본 데이터가 {(base_output_dir / recent_posts_fname)}에 저장되었습니다.")
     else:
         print("수집된 프로필 데이터가 없습니다.")
 
