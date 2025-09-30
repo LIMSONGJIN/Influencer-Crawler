@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogCraft Pro - SaaS 서비스 홈</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Hub -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                        BlogCraft Pro
+                    </h1>
+                    <span class="ml-2 px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full font-semibold">SaaS</span>
+                </div>
+                <div class="text-sm text-gray-600">
+                    AI 기반 블로그 & SNS 콘텐츠 생성 플랫폼
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-6">
+                BlogCraft Pro SaaS 서비스
+            </h1>
+            <p class="text-xl mb-8 opacity-90">
+                모든 페이지와 기능을 한 곳에서 확인하세요
+            </p>
+            <div class="flex justify-center space-x-4">
+                <div class="bg-white/20 backdrop-blur-lg rounded-lg px-6 py-3">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    전체 기능 구현 완료
+                </div>
+                <div class="bg-white/20 backdrop-blur-lg rounded-lg px-6 py-3">
+                    <i class="fas fa-database mr-2"></i>
+                    데이터베이스 설계 완료
+                </div>
+                <div class="bg-white/20 backdrop-blur-lg rounded-lg px-6 py-3">
+                    <i class="fas fa-shield-alt mr-2"></i>
+                    보안 시스템 구축
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Grid -->
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-center mb-12">전체 서비스 맵</h2>
+        
+        <!-- User Pages -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-semibold mb-6 text-purple-600">
+                <i class="fas fa-user-circle mr-2"></i>사용자 페이지
+            </h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Main App -->
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6 border-2 border-purple-500">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-xl font-bold">메인 애플리케이션</h4>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">운영중</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        AI 기반 블로그 작성 및 SNS 변환 기능
+                    </p>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>✅ 네이버/티스토리/워드프레스 최적화</li>
+                        <li>✅ SEO 분석 기능</li>
+                        <li>✅ SNS 5개 플랫폼 변환</li>
+                    </ul>
+                    <a href="index.html" target="_blank" class="inline-block w-full text-center bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition font-semibold">
+                        <i class="fas fa-rocket mr-2"></i>앱 실행하기
+                    </a>
+                </div>
+
+                <!-- User Dashboard -->
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-xl font-bold">사용자 대시보드</h4>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Pro</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        사용량 추적 및 통계 확인
+                    </p>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>📊 실시간 사용량 모니터링</li>
+                        <li>📈 주간/월간 통계</li>
+                        <li>💳 구독 관리</li>
+                    </ul>
+                    <a href="saas-dashboard.html" target="_blank" class="inline-block w-full text-center bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                        <i class="fas fa-chart-bar mr-2"></i>대시보드 보기
+                    </a>
+                </div>
+
+                <!-- Pricing -->
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-xl font-bold">요금제</h4>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">공개</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        3단계 구독 플랜 선택
+                    </p>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>🆓 Free 플랜</li>
+                        <li>⭐ Professional 플랜</li>
+                        <li>🏢 Enterprise 플랜</li>
+                    </ul>
+                    <a href="saas-pricing.html" target="_blank" class="inline-block w-full text-center bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold">
+                        <i class="fas fa-tags mr-2"></i>요금제 보기
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Pages -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-semibold mb-6 text-red-600">
+                <i class="fas fa-user-shield mr-2"></i>관리자 페이지
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Admin Dashboard -->
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6 border-2 border-red-500">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-xl font-bold">관리자 대시보드</h4>
+                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">Admin Only</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        전체 시스템 관리 및 모니터링
+                    </p>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>👥 사용자 관리</li>
+                        <li>💰 수익 분석</li>
+                        <li>📊 시스템 통계</li>
+                        <li>⚙️ 시스템 설정</li>
+                    </ul>
+                    <a href="admin-dashboard.html" target="_blank" class="inline-block w-full text-center bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition font-semibold">
+                        <i class="fas fa-cog mr-2"></i>관리자 페이지
+                    </a>
+                </div>
+
+                <!-- Database Schema -->
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-xl font-bold">데이터베이스 스키마</h4>
+                        <span class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">SQL</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        MySQL 데이터베이스 구조
+                    </p>
+                    <ul class="text-sm text-gray-600 mb-4 space-y-1">
+                        <li>📋 13개 테이블</li>
+                        <li>🔄 자동 트리거</li>
+                        <li>📊 분석 뷰</li>
+                        <li>🔐 보안 설계</li>
+                    </ul>
+                    <a href="database-schema.sql" target="_blank" class="inline-block w-full text-center bg-gray-600 text-white py-3 rounded-lg hover:bg-gray-700 transition font-semibold">
+                        <i class="fas fa-database mr-2"></i>스키마 보기
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Overview -->
+        <div class="bg-gray-100 rounded-xl p-8">
+            <h3 class="text-2xl font-semibold mb-6 text-center">
+                <i class="fas fa-star mr-2 text-yellow-500"></i>주요 기능
+            </h3>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="bg-white rounded-lg p-4 mb-3">
+                        <i class="fas fa-pen-fancy text-3xl text-purple-600"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">AI 블로그 작성</h4>
+                    <p class="text-sm text-gray-600">Claude, GPT-4, Gemini 통합</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-white rounded-lg p-4 mb-3">
+                        <i class="fas fa-share-nodes text-3xl text-blue-600"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">SNS 자동 변환</h4>
+                    <p class="text-sm text-gray-600">5개 플랫폼 최적화</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-white rounded-lg p-4 mb-3">
+                        <i class="fas fa-chart-line text-3xl text-green-600"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">실시간 분석</h4>
+                    <p class="text-sm text-gray-600">사용량 및 성과 추적</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-white rounded-lg p-4 mb-3">
+                        <i class="fas fa-users-cog text-3xl text-red-600"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">팀 협업</h4>
+                    <p class="text-sm text-gray-600">멀티 유저 지원</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="mt-12 bg-purple-50 rounded-xl p-8">
+            <h3 class="text-2xl font-semibold mb-6 text-center text-purple-800">
+                <i class="fas fa-info-circle mr-2"></i>구현 현황
+            </h3>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                    <p class="text-4xl font-bold text-purple-600">6</p>
+                    <p class="text-gray-600">완성된 페이지</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold text-purple-600">13</p>
+                    <p class="text-gray-600">데이터베이스 테이블</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold text-purple-600">100%</p>
+                    <p class="text-gray-600">기능 구현율</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-12 bg-blue-50 rounded-xl p-8">
+            <h3 class="text-xl font-semibold mb-4 text-blue-800">
+                <i class="fas fa-question-circle mr-2"></i>사용 방법
+            </h3>
+            <ol class="space-y-2 text-gray-700">
+                <li><strong>1.</strong> 위의 카드에서 원하는 페이지를 선택하세요</li>
+                <li><strong>2.</strong> "앱 실행하기" 버튼을 클릭하면 새 탭에서 페이지가 열립니다</li>
+                <li><strong>3.</strong> 메인 앱(index.html)에서 블로그 작성 기능을 테스트해보세요</li>
+                <li><strong>4.</strong> 관리자 대시보드에서 전체 시스템을 관리할 수 있습니다</li>
+                <li><strong>5.</strong> 데이터베이스 스키마 파일로 MySQL 데이터베이스를 생성할 수 있습니다</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-lg mb-2">© BlogCraft Pro - Complete SaaS Solution</p>
+            <p class="opacity-75">AI 기반 콘텐츠 생성 플랫폼</p>
+        </div>
+    </footer>
+</body>
+</html>

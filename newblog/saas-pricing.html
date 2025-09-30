@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogCraft Pro - 요금제</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .price-card {
+            transition: all 0.3s;
+        }
+        .price-card:hover {
+            transform: scale(1.05);
+        }
+        .popular-badge {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-purple-600">BlogCraft Pro</h1>
+                    <span class="ml-2 px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">SaaS</span>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-purple-600">홈</a>
+                    <a href="saas-dashboard.html" class="text-gray-600 hover:text-purple-600">대시보드</a>
+                    <a href="#" class="text-purple-600 font-medium">요금제</a>
+                    <a href="saas-login.html" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+                        로그인
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                당신의 콘텐츠 생산성을 극대화하세요
+            </h1>
+            <p class="text-xl opacity-90 mb-8">
+                AI 기반 블로그 작성 및 SNS 콘텐츠 변환 서비스
+            </p>
+            <div class="flex justify-center items-center space-x-6">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>7일 무료 체험</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>언제든 해지 가능</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>카드 정보 불필요</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Toggle -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex justify-center items-center space-x-4">
+            <span class="text-lg">월간 결제</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="billingToggle" class="sr-only peer" onchange="toggleBilling()">
+                <div class="w-14 h-7 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-purple-600"></div>
+            </label>
+            <span class="text-lg">연간 결제</span>
+            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">20% 할인</span>
+        </div>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="max-w-7xl mx-auto px-4 pb-20">
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Free Plan -->
+            <div class="price-card bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold mb-2">Free</h3>
+                <p class="text-gray-600 mb-6">개인 블로거를 위한 무료 플랜</p>
+                <div class="mb-6">
+                    <span class="text-4xl font-bold">₩0</span>
+                    <span class="text-gray-500">/월</span>
+                </div>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span>월 5개 블로그 포스트</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span>기본 SEO 최적화</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span>네이버 블로그 지원</span>
+                    </li>
+                    <li class="flex items-start text-gray-400">
+                        <i class="fas fa-times text-gray-400 mr-3 mt-1"></i>
+                        <span>SNS 변환 기능</span>
+                    </li>
+                    <li class="flex items-start text-gray-400">
+                        <i class="fas fa-times text-gray-400 mr-3 mt-1"></i>
+                        <span>API 접근</span>
+                    </li>
+                    <li class="flex items-start text-gray-400">
+                        <i class="fas fa-times text-gray-400 mr-3 mt-1"></i>
+                        <span>우선 지원</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 border-2 border-purple-600 text-purple-600 rounded-lg font-semibold hover:bg-purple-50 transition">
+                    무료로 시작하기
+                </button>
+            </div>
+
+            <!-- Professional Plan -->
+            <div class="price-card bg-white rounded-2xl shadow-xl p-8 relative transform scale-105">
+                <div class="popular-badge absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                    가장 인기
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Professional</h3>
+                <p class="text-gray-600 mb-6">전문 콘텐츠 크리에이터용</p>
+                <div class="mb-6">
+                    <span class="text-4xl font-bold monthly-price">₩49,000</span>
+                    <span class="text-4xl font-bold yearly-price hidden">₩39,200</span>
+                    <span class="text-gray-500">/월</span>
+                </div>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span class="font-medium">월 100개 블로그 포스트</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span class="font-medium">고급 SEO 최적화</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span class="font-medium">모든 플랫폼 지원</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span class="font-medium">SNS 변환 무제한</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span class="font-medium">API 50,000 호출/월</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span class="font-medium">우선 지원</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:shadow-lg transition">
+                    7일 무료 체험 시작
+                </button>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="price-card bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+                <p class="text-gray-600 mb-6">대규모 팀과 기업용</p>
+                <div class="mb-6">
+                    <span class="text-4xl font-bold monthly-price">₩149,000</span>
+                    <span class="text-4xl font-bold yearly-price hidden">₩119,200</span>
+                    <span class="text-gray-500">/월</span>
+                </div>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span>블로그 포스트 무제한</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span>엔터프라이즈 SEO</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span>팀 협업 기능</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span>SNS 변환 무제한</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span>API 호출 무제한</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        <span>전담 계정 관리자</span>
+                    </li>
+                </ul>
+                <button class="w-full py-3 bg-gray-800 text-white rounded-lg font-semibold hover:bg-gray-900 transition">
+                    영업팀 문의
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Comparison -->
+    <div class="max-w-7xl mx-auto px-4 py-20 border-t">
+        <h2 class="text-3xl font-bold text-center mb-12">상세 기능 비교</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead>
+                    <tr class="border-b">
+                        <th class="text-left py-4 px-4">기능</th>
+                        <th class="text-center py-4 px-4">Free</th>
+                        <th class="text-center py-4 px-4 bg-purple-50">Professional</th>
+                        <th class="text-center py-4 px-4">Enterprise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b">
+                        <td class="py-4 px-4 font-medium">블로그 포스트</td>
+                        <td class="text-center py-4 px-4">5개/월</td>
+                        <td class="text-center py-4 px-4 bg-purple-50 font-medium">100개/월</td>
+                        <td class="text-center py-4 px-4">무제한</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-4 px-4 font-medium">SNS 변환</td>
+                        <td class="text-center py-4 px-4">❌</td>
+                        <td class="text-center py-4 px-4 bg-purple-50">✅</td>
+                        <td class="text-center py-4 px-4">✅</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-4 px-4 font-medium">AI 모델 선택</td>
+                        <td class="text-center py-4 px-4">기본</td>
+                        <td class="text-center py-4 px-4 bg-purple-50">모든 모델</td>
+                        <td class="text-center py-4 px-4">모든 모델 + 커스텀</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-4 px-4 font-medium">SEO 최적화</td>
+                        <td class="text-center py-4 px-4">기본</td>
+                        <td class="text-center py-4 px-4 bg-purple-50">고급</td>
+                        <td class="text-center py-4 px-4">엔터프라이즈</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-4 px-4 font-medium">API 접근</td>
+                        <td class="text-center py-4 px-4">❌</td>
+                        <td class="text-center py-4 px-4 bg-purple-50">50,000 호출</td>
+                        <td class="text-center py-4 px-4">무제한</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-4 px-4 font-medium">팀 협업</td>
+                        <td class="text-center py-4 px-4">❌</td>
+                        <td class="text-center py-4 px-4 bg-purple-50">최대 5명</td>
+                        <td class="text-center py-4 px-4">무제한</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-4 px-4 font-medium">분석 대시보드</td>
+                        <td class="text-center py-4 px-4">기본</td>
+                        <td class="text-center py-4 px-4 bg-purple-50">고급</td>
+                        <td class="text-center py-4 px-4">커스텀</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-4 px-4 font-medium">데이터 내보내기</td>
+                        <td class="text-center py-4 px-4">❌</td>
+                        <td class="text-center py-4 px-4 bg-purple-50">✅</td>
+                        <td class="text-center py-4 px-4">✅</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-4 px-4 font-medium">고객 지원</td>
+                        <td class="text-center py-4 px-4">이메일</td>
+                        <td class="text-center py-4 px-4 bg-purple-50">우선 지원</td>
+                        <td class="text-center py-4 px-4">전담 매니저</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="max-w-4xl mx-auto px-4 py-20">
+        <h2 class="text-3xl font-bold text-center mb-12">자주 묻는 질문</h2>
+        <div class="space-y-4">
+            <details class="bg-white rounded-lg p-6 cursor-pointer">
+                <summary class="font-semibold text-lg">무료 체험 기간 동안 모든 기능을 사용할 수 있나요?</summary>
+                <p class="mt-4 text-gray-600">네, Professional 플랜의 모든 기능을 7일 동안 무료로 사용하실 수 있습니다. 신용카드 정보 없이 바로 시작할 수 있습니다.</p>
+            </details>
+            <details class="bg-white rounded-lg p-6 cursor-pointer">
+                <summary class="font-semibold text-lg">언제든지 플랜을 변경할 수 있나요?</summary>
+                <p class="mt-4 text-gray-600">물론입니다. 대시보드에서 언제든지 플랜을 업그레이드하거나 다운그레이드할 수 있으며, 변경사항은 다음 결제일부터 적용됩니다.</p>
+            </details>
+            <details class="bg-white rounded-lg p-6 cursor-pointer">
+                <summary class="font-semibold text-lg">API 호출 제한을 초과하면 어떻게 되나요?</summary>
+                <p class="mt-4 text-gray-600">API 호출 제한의 80%에 도달하면 알림을 보내드립니다. 제한을 초과하면 추가 요금이 부과되거나 다음 플랜으로 업그레이드를 권장해드립니다.</p>
+            </details>
+            <details class="bg-white rounded-lg p-6 cursor-pointer">
+                <summary class="font-semibold text-lg">환불 정책은 어떻게 되나요?</summary>
+                <p class="mt-4 text-gray-600">구매 후 14일 이내에는 100% 환불이 가능합니다. 14일 이후에는 남은 기간에 대한 부분 환불을 제공합니다.</p>
+            </details>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="gradient-bg text-white py-20">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">지금 바로 시작하세요!</h2>
+            <p class="text-xl mb-8 opacity-90">7일 무료 체험으로 BlogCraft Pro의 모든 기능을 경험해보세요</p>
+            <button class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-xl transition">
+                무료 체험 시작하기
+            </button>
+            <p class="mt-4 text-sm opacity-75">신용카드 불필요 • 언제든 해지 가능</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleBilling() {
+            const toggle = document.getElementById('billingToggle');
+            const monthlyPrices = document.querySelectorAll('.monthly-price');
+            const yearlyPrices = document.querySelectorAll('.yearly-price');
+            
+            if (toggle.checked) {
+                monthlyPrices.forEach(el => el.classList.add('hidden'));
+                yearlyPrices.forEach(el => el.classList.remove('hidden'));
+            } else {
+                monthlyPrices.forEach(el => el.classList.remove('hidden'));
+                yearlyPrices.forEach(el => el.classList.add('hidden'));
+            }
+        }
+    </script>
+</body>
+</html>

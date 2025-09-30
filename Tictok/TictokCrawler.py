@@ -1,25 +1,48 @@
+import requests
+import random
 from TikTokApi import TikTokApi
 from openpyxl import Workbook
 import asyncio
 
+def get_random_proxy():
+    """
+    무료 프록시 API에서 랜덤으로 하나 뽑기
+    """
+    try:
+        resp = requests.get("https://www.proxy-list.download/api/v1/get?type=http", timeout=5)
+        proxies = [line.strip() for line in resp.text.splitlines() if line.strip()]
+        if proxies:
+            return random.choice(proxies)
+        return None
+    except Exception as e:
+        print(f"프록시 불러오기 실패: {e}")
+        return None
+
+def make_proxy_dict(proxy_str):
+    return {"server": f"http://{proxy_str}"}
+
 class TikTokCrawler:
     def __init__(self):
         self.api = TikTokApi()
+        self.last_proxy = None
 
-    async def create_sessions(self, num_sessions=1):
+    async def create_sessions(self, num_sessions=1, use_proxy=True):
+        proxies = []
+        if use_proxy:
+            proxy_str = get_random_proxy()
+            self.last_proxy = proxy_str
+            if proxy_str:
+                proxies = [make_proxy_dict(proxy_str) for _ in range(num_sessions)]
+                print(f"랜덤 프록시 사용: {proxy_str}")
+            else:
+                print("프록시를 불러오지 못해 프록시 없이 시도합니다.")
         await self.api.create_sessions(
             num_sessions=num_sessions,
             headless=False,
             browser="webkit",
-            proxies=[
-                {
-                    "server": "http://123.45.67.89:8080",  # ← 여기에 실제 프록시 주소:포트 입력!
-                    # "username": "proxy_user",             # 필요시 주석 해제
-                    # "password": "proxy_pass",
-                }
-            ]
+            proxies=proxies if proxies else None
         )
-        print(f"세션 {num_sessions}개 생성 완료 (headless=False, browser='webkit', proxy 적용)")
+        print(f"세션 {num_sessions}개 생성 완료 (proxy: {self.last_proxy})")
 
     async def crawl_hashtag(self, hashtag: str, limit: int = 50):
         hashtag_obj = self.api.hashtag(name=hashtag)
@@ -110,12 +133,23 @@ class TikTokCrawler:
 
 async def main():
     crawler = TikTokCrawler()
-    # 세션 생성 필수!
-    await crawler.create_sessions(num_sessions=1)
+    max_attempts = 10
+    attempt = 0
     keyword = input('해시태그(예: fashion) 입력: ')
     limit = int(input('수집 개수 입력 (최대 50개 권장): '))
-    videos = await crawler.crawl_hashtag(keyword, limit)
-    crawler.save_to_excel(videos, keyword)
+    while attempt < max_attempts:
+        try:
+            await crawler.create_sessions(num_sessions=1, use_proxy=True)
+            videos = await crawler.crawl_hashtag(keyword, limit)
+            crawler.save_to_excel(videos, keyword)
+            print("크롤링 성공!")
+            break
+        except Exception as e:
+            attempt += 1
+            print(f"[{attempt}/{max_attempts}] 크롤링 실패, 프록시 변경 후 재시도... 에러: {e}")
+            await asyncio.sleep(2)
+    else:
+        print("여러 번 시도했지만 크롤링 실패. 프록시를 확인하거나 VPN/유료 프록시를 고려하세요.")
 
 if __name__ == "__main__":
     asyncio.run(main())

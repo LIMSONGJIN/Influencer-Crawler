@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogCraft Pro - 로그인</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .input-focus {
+            transition: all 0.3s;
+        }
+        .input-focus:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .social-btn {
+            transition: all 0.3s;
+        }
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+    <!-- Main Container -->
+    <div class="w-full max-w-5xl grid lg:grid-cols-2 gap-8">
+        <!-- Left Side - Branding -->
+        <div class="hidden lg:flex flex-col justify-center text-white p-8">
+            <div class="mb-8">
+                <h1 class="text-5xl font-bold mb-4">BlogCraft Pro</h1>
+                <p class="text-xl opacity-90">AI 기반 블로그 & SNS 콘텐츠 생성 플랫폼</p>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle mt-1 mr-3"></i>
+                    <div>
+                        <h3 className="font-semibold mb-1">AI 3사 통합</h3>
+                        <p class="text-sm opacity-80">Claude, GPT-4, Gemini를 한 곳에서</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle mt-1 mr-3"></i>
+                    <div>
+                        <h3 class="font-semibold mb-1">플랫폼 최적화</h3>
+                        <p class="text-sm opacity-80">네이버, 티스토리, 워드프레스 SEO 최적화</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle mt-1 mr-3"></i>
+                    <div>
+                        <h3 class="font-semibold mb-1">SNS 자동 변환</h3>
+                        <p class="text-sm opacity-80">5개 플랫폼 원클릭 변환</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle mt-1 mr-3"></i>
+                    <div>
+                        <h3 class="font-semibold mb-1">이미지 통합</h3>
+                        <p class="text-sm opacity-80">최대 10장 이미지 AI 분석</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12">
+                <div class="flex items-center space-x-4 text-sm">
+                    <a href="index-saas.html" class="hover:underline">서비스 소개</a>
+                    <span>•</span>
+                    <a href="saas-pricing.html" class="hover:underline">요금제</a>
+                    <span>•</span>
+                    <a href="#" class="hover:underline">도움말</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div class="glass-effect rounded-2xl shadow-2xl p-8">
+            <!-- Tab Navigation -->
+            <div class="flex mb-8 border-b border-gray-200">
+                <button id="loginTab" class="flex-1 pb-4 text-center font-semibold text-purple-600 border-b-2 border-purple-600 transition">
+                    로그인
+                </button>
+                <button id="signupTab" class="flex-1 pb-4 text-center font-semibold text-gray-500 hover:text-gray-700 transition">
+                    회원가입
+                </button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginForm" class="space-y-6">
+                <h2 class="text-2xl font-bold text-gray-800">다시 오신 것을 환영합니다!</h2>
+                
+                <!-- Social Login Buttons -->
+                <div class="space-y-3">
+                    <button type="button" onclick="handleSocialLogin('google')" class="social-btn w-full flex items-center justify-center space-x-3 bg-white border-2 border-gray-200 rounded-lg py-3 hover:bg-gray-50">
+                        <img src="https://www.google.com/favicon.ico" class="w-5 h-5">
+                        <span>Google 로그인</span>
+                    </button>
+                    <button type="button" onclick="handleSocialLogin('kakao')" class="social-btn w-full flex items-center justify-center space-x-3 bg-yellow-400 rounded-lg py-3 hover:bg-yellow-500">
+                        <i class="fas fa-comment text-brown-800"></i>
+                        <span>카카오 로그인</span>
+                    </button>
+                    <button type="button" onclick="handleSocialLogin('naver')" class="social-btn w-full flex items-center justify-center space-x-3 bg-green-500 text-white rounded-lg py-3 hover:bg-green-600">
+                        <span class="font-bold">N</span>
+                        <span>네이버 로그인</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center">
+                    <div class="flex-1 border-t border-gray-300"></div>
+                    <span class="px-4 text-gray-500 text-sm">또는</span>
+                    <div class="flex-1 border-t border-gray-300"></div>
+                </div>
+
+                <!-- Email Login -->
+                <form onsubmit="handleLogin(event)">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">이메일</label>
+                            <input type="email" required
+                                   class="input-focus w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none"
+                                   placeholder="example@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">비밀번호</label>
+                            <div class="relative">
+                                <input type="password" required id="loginPassword"
+                                       class="input-focus w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none"
+                                       placeholder="비밀번호를 입력하세요">
+                                <button type="button" onclick="togglePassword('loginPassword')" 
+                                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span class="text-sm text-gray-600">로그인 상태 유지</span>
+                            </label>
+                            <a href="#" class="text-sm text-purple-600 hover:underline">비밀번호 찾기</a>
+                        </div>
+                    </div>
+                    <button type="submit" 
+                            class="w-full mt-6 bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                        로그인
+                    </button>
+                </form>
+
+                <p class="text-center text-sm text-gray-600">
+                    아직 계정이 없으신가요? 
+                    <button onclick="switchToSignup()" class="text-purple-600 hover:underline font-semibold">
+                        회원가입
+                    </button>
+                </p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signupForm" class="space-y-6 hidden">
+                <h2 class="text-2xl font-bold text-gray-800">무료로 시작하세요!</h2>
+                
+                <form onsubmit="handleSignup(event)">
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">이름</label>
+                                <input type="text" required
+                                       class="input-focus w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none"
+                                       placeholder="홍길동">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">회사명 (선택)</label>
+                                <input type="text"
+                                       class="input-focus w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none"
+                                       placeholder="회사명">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">이메일</label>
+                            <input type="email" required
+                                   class="input-focus w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none"
+                                   placeholder="example@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">비밀번호</label>
+                            <div class="relative">
+                                <input type="password" required id="signupPassword"
+                                       class="input-focus w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none"
+                                       placeholder="8자 이상, 영문/숫자/특수문자 포함">
+                                <button type="button" onclick="togglePassword('signupPassword')"
+                                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="mt-2 space-y-1">
+                                <div class="flex items-center text-xs">
+                                    <i class="fas fa-check-circle text-green-500 mr-2 hidden" id="lengthCheck"></i>
+                                    <i class="fas fa-times-circle text-gray-300 mr-2" id="lengthX"></i>
+                                    <span>8자 이상</span>
+                                </div>
+                                <div class="flex items-center text-xs">
+                                    <i class="fas fa-check-circle text-green-500 mr-2 hidden" id="charCheck"></i>
+                                    <i class="fas fa-times-circle text-gray-300 mr-2" id="charX"></i>
+                                    <span>영문, 숫자, 특수문자 포함</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">비밀번호 확인</label>
+                            <input type="password" required id="confirmPassword"
+                                   class="input-focus w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none"
+                                   placeholder="비밀번호를 다시 입력하세요">
+                        </div>
+                        <div>
+                            <label class="flex items-start">
+                                <input type="checkbox" required class="mt-1 mr-2">
+                                <span class="text-sm text-gray-600">
+                                    <a href="#" class="text-purple-600 hover:underline">이용약관</a> 및 
+                                    <a href="#" class="text-purple-600 hover:underline">개인정보처리방침</a>에 동의합니다.
+                                </span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span class="text-sm text-gray-600">마케팅 정보 수신 동의 (선택)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit"
+                            class="w-full mt-6 bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                        무료로 시작하기
+                    </button>
+                </form>
+
+                <div class="flex items-center">
+                    <div class="flex-1 border-t border-gray-300"></div>
+                    <span class="px-4 text-gray-500 text-sm">또는</span>
+                    <div class="flex-1 border-t border-gray-300"></div>
+                </div>
+
+                <!-- Social Signup -->
+                <div class="space-y-3">
+                    <button type="button" onclick="handleSocialLogin('google')" class="social-btn w-full flex items-center justify-center space-x-3 bg-white border-2 border-gray-200 rounded-lg py-3 hover:bg-gray-50">
+                        <img src="https://www.google.com/favicon.ico" class="w-5 h-5">
+                        <span>Google 가입</span>
+                    </button>
+                </div>
+
+                <p class="text-center text-sm text-gray-600">
+                    이미 계정이 있으신가요? 
+                    <button onclick="switchToLogin()" class="text-purple-600 hover:underline font-semibold">
+                        로그인
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Branding (shown only on small screens) -->
+    <div class="lg:hidden absolute top-8 left-1/2 transform -translate-x-1/2 text-white text-center">
+        <h1 class="text-3xl font-bold">BlogCraft Pro</h1>
+        <p class="text-sm opacity-90">AI 콘텐츠 생성 플랫폼</p>
+    </div>
+
+    <script>
+        // Tab switching
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+
+        loginTab.addEventListener('click', switchToLogin);
+        signupTab.addEventListener('click', switchToSignup);
+
+        function switchToLogin() {
+            loginTab.classList.add('text-purple-600', 'border-b-2', 'border-purple-600');
+            loginTab.classList.remove('text-gray-500');
+            signupTab.classList.remove('text-purple-600', 'border-b-2', 'border-purple-600');
+            signupTab.classList.add('text-gray-500');
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+        }
+
+        function switchToSignup() {
+            signupTab.classList.add('text-purple-600', 'border-b-2', 'border-purple-600');
+            signupTab.classList.remove('text-gray-500');
+            loginTab.classList.remove('text-purple-600', 'border-b-2', 'border-purple-600');
+            loginTab.classList.add('text-gray-500');
+            signupForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+        }
+
+        // Password toggle
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = event.target;
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Password validation
+        document.getElementById('signupPassword').addEventListener('input', function(e) {
+            const password = e.target.value;
+            
+            // Length check
+            if (password.length >= 8) {
+                document.getElementById('lengthCheck').classList.remove('hidden');
+                document.getElementById('lengthX').classList.add('hidden');
+            } else {
+                document.getElementById('lengthCheck').classList.add('hidden');
+                document.getElementById('lengthX').classList.remove('hidden');
+            }
+            
+            // Character check
+            const hasLetter = /[a-zA-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecial = /[!@#$%^&*]/.test(password);
+            
+            if (hasLetter && hasNumber && hasSpecial) {
+                document.getElementById('charCheck').classList.remove('hidden');
+                document.getElementById('charX').classList.add('hidden');
+            } else {
+                document.getElementById('charCheck').classList.add('hidden');
+                document.getElementById('charX').classList.remove('hidden');
+            }
+        });
+
+        // Form handlers
+        function handleLogin(event) {
+            event.preventDefault();
+            // Store login state
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userEmail', event.target.elements[0].value);
+            
+            // Show success message
+            showNotification('로그인 성공! 대시보드로 이동합니다...', 'success');
+            
+            // Redirect to dashboard
+            setTimeout(() => {
+                window.location.href = 'saas-dashboard.html';
+            }, 1500);
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            // Check password match
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showNotification('비밀번호가 일치하지 않습니다.', 'error');
+                return;
+            }
+            
+            // Store signup state
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userEmail', event.target.elements[2].value);
+            localStorage.setItem('userName', event.target.elements[0].value);
+            localStorage.setItem('subscriptionPlan', 'free');
+            
+            // Show success message
+            showNotification('회원가입 완료! 대시보드로 이동합니다...', 'success');
+            
+            // Redirect to dashboard
+            setTimeout(() => {
+                window.location.href = 'saas-dashboard.html';
+            }, 1500);
+        }
+
+        // Notification function
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 ${
+                type === 'success' ? 'bg-green-500' : 'bg-red-500'
+            } text-white`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Social login handler
+        function handleSocialLogin(provider) {
+            let authUrl = '';
+            let providerName = '';
+            
+            switch(provider) {
+                case 'google':
+                    providerName = 'Google';
+                    // Google OAuth 2.0 URL
+                    // 실제 구현시 CLIENT_ID를 발급받은 것으로 교체해야 합니다
+                    authUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' +
+                        'client_id=YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com&' +
+                        'redirect_uri=' + encodeURIComponent(window.location.origin + '/callback.html') + '&' +
+                        'response_type=token&' +
+                        'scope=email%20profile&' +
+                        'state=google';
+                    break;
+                    
+                case 'kakao':
+                    providerName = '카카오';
+                    // Kakao OAuth URL
+                    // 실제 구현시 REST_API_KEY를 발급받은 것으로 교체해야 합니다
+                    authUrl = 'https://kauth.kakao.com/oauth/authorize?' +
+                        'client_id=YOUR_KAKAO_REST_API_KEY&' +
+                        'redirect_uri=' + encodeURIComponent(window.location.origin + '/callback.html') + '&' +
+                        'response_type=code&' +
+                        'state=kakao';
+                    break;
+                    
+                case 'naver':
+                    providerName = '네이버';
+                    // Naver OAuth URL
+                    // 실제 구현시 CLIENT_ID를 발급받은 것으로 교체해야 합니다
+                    authUrl = 'https://nid.naver.com/oauth2.0/authorize?' +
+                        'client_id=YOUR_NAVER_CLIENT_ID&' +
+                        'redirect_uri=' + encodeURIComponent(window.location.origin + '/callback.html') + '&' +
+                        'response_type=code&' +
+                        'state=naver';
+                    break;
+            }
+            
+            // 실제 OAuth 페이지로 리다이렉트
+            if (authUrl) {
+                showNotification(`${providerName} 로그인 페이지로 이동합니다...`, 'info');
+                
+                // 개발 환경에서는 데모 모드로 작동
+                // 실제 환경에서는 아래 주석을 해제하고 위의 데모 코드를 제거하세요
+                if (window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
+                    // 로컬 개발 환경 - 데모 모드
+                    showNotification(`개발 모드: ${providerName} OAuth 설정이 필요합니다.\n실제 환경에서는 OAuth 인증이 진행됩니다.`, 'warning');
+                    
+                    // 데모용 로그인 다이얼로그
+                    const email = prompt(`${providerName} 계정 이메일을 입력하세요:`);
+                    if (email) {
+                        localStorage.setItem('isLoggedIn', 'true');
+                        localStorage.setItem('loginProvider', provider);
+                        localStorage.setItem('userEmail', email);
+                        localStorage.setItem('userName', email.split('@')[0]);
+                        localStorage.setItem('subscriptionPlan', 'free');
+                        
+                        showNotification(`${providerName} 로그인 성공!`, 'success');
+                        setTimeout(() => {
+                            window.location.href = 'saas-dashboard.html';
+                        }, 1500);
+                    }
+                } else {
+                    // 실제 운영 환경 - OAuth 페이지로 이동
+                    window.location.href = authUrl;
+                }
+            } else {
+                showNotification('로그인 설정 오류가 발생했습니다.', 'error');
+            }
+        }
+
+        // Check if already logged in
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            // Optional: Auto-redirect to dashboard if already logged in
+            // window.location.href = 'saas-dashboard.html';
+        }
+    </script>
+</body>
+</html>

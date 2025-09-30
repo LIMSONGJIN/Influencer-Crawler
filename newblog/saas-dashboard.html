@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogCraft Pro - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .usage-bar {
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-purple-600">BlogCraft Pro</h1>
+                    <span class="ml-2 px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">SaaS</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -mt-1 ml-2 bg-red-500 text-white text-xs rounded-full px-1">3</span>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <img src="https://ui-avatars.com/api/?name=User&background=667eea&color=fff" class="w-8 h-8 rounded-full">
+                        <span class="text-sm font-medium">사용자님</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="flex">
+        <aside class="w-64 bg-white shadow-md h-screen sticky top-0">
+            <div class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 text-purple-600 bg-purple-50 rounded-lg p-3">
+                            <i class="fas fa-home"></i>
+                            <span>대시보드</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html" class="flex items-center space-x-3 text-gray-700 hover:bg-gray-100 rounded-lg p-3">
+                            <i class="fas fa-pen"></i>
+                            <span>콘텐츠 생성</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 text-gray-700 hover:bg-gray-100 rounded-lg p-3">
+                            <i class="fas fa-history"></i>
+                            <span>작성 기록</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 text-gray-700 hover:bg-gray-100 rounded-lg p-3">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>분석</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 text-gray-700 hover:bg-gray-100 rounded-lg p-3">
+                            <i class="fas fa-key"></i>
+                            <span>API 설정</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="saas-pricing.html" class="flex items-center space-x-3 text-gray-700 hover:bg-gray-100 rounded-lg p-3">
+                            <i class="fas fa-credit-card"></i>
+                            <span>요금제</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 text-gray-700 hover:bg-gray-100 rounded-lg p-3">
+                            <i class="fas fa-cog"></i>
+                            <span>설정</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <!-- Current Plan Card -->
+            <div class="gradient-bg rounded-2xl p-6 text-white mb-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2">Professional Plan</h2>
+                        <p class="opacity-90">다음 결제일: 2025년 2월 15일</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-3xl font-bold">₩49,000<span class="text-lg">/월</span></p>
+                        <button class="mt-2 bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100">
+                            플랜 업그레이드
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <!-- Blog Posts -->
+                <div class="bg-white rounded-xl p-6 card-hover">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-gray-500 text-sm mb-1">월간 블로그 포스트</p>
+                            <p class="text-3xl font-bold">47 / 100</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <i class="fas fa-file-alt text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="usage-bar bg-blue-600 h-2 rounded-full" style="width: 47%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">53개 남음</p>
+                </div>
+
+                <!-- SNS Conversions -->
+                <div class="bg-white rounded-xl p-6 card-hover">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-gray-500 text-sm mb-1">SNS 변환</p>
+                            <p class="text-3xl font-bold">235 / 500</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <i class="fas fa-share-alt text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="usage-bar bg-green-600 h-2 rounded-full" style="width: 47%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">265개 남음</p>
+                </div>
+
+                <!-- API Calls -->
+                <div class="bg-white rounded-xl p-6 card-hover">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-gray-500 text-sm mb-1">API 호출</p>
+                            <p class="text-3xl font-bold">8.2K / 50K</p>
+                        </div>
+                        <div class="bg-purple-100 p-3 rounded-lg">
+                            <i class="fas fa-code text-purple-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="usage-bar bg-purple-600 h-2 rounded-full" style="width: 16.4%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">41.8K 남음</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- Weekly Activity -->
+                <div class="bg-white rounded-xl p-6">
+                    <h3 class="text-lg font-bold mb-4">주간 활동</h3>
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+
+                <!-- Platform Distribution -->
+                <div class="bg-white rounded-xl p-6">
+                    <h3 class="text-lg font-bold mb-4">플랫폼별 콘텐츠</h3>
+                    <canvas id="platformChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="bg-white rounded-xl p-6">
+                <h3 class="text-lg font-bold mb-4">최근 활동</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between py-3 border-b">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-purple-100 p-2 rounded-lg">
+                                <i class="fas fa-pen text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">블로그 포스트 생성</p>
+                                <p class="text-sm text-gray-500">최신 다이어트 트렌드 - 네이버 최적화</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">5분 전</span>
+                    </div>
+                    <div class="flex items-center justify-between py-3 border-b">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-blue-100 p-2 rounded-lg">
+                                <i class="fas fa-share text-blue-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">SNS 변환 완료</p>
+                                <p class="text-sm text-gray-500">Instagram 캐러셀 7장 생성</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">1시간 전</span>
+                    </div>
+                    <div class="flex items-center justify-between py-3 border-b">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-green-100 p-2 rounded-lg">
+                                <i class="fas fa-check text-green-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">SEO 분석 완료</p>
+                                <p class="text-sm text-gray-500">SEO 점수 92/100 달성</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">3시간 전</span>
+                    </div>
+                    <div class="flex items-center justify-between py-3">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-yellow-100 p-2 rounded-lg">
+                                <i class="fas fa-download text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">콘텐츠 다운로드</p>
+                                <p class="text-sm text-gray-500">마케팅 전략 가이드.html</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">5시간 전</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                <button onclick="location.href='index.html'" class="bg-purple-600 text-white p-4 rounded-xl hover:bg-purple-700 transition">
+                    <i class="fas fa-plus-circle text-2xl mb-2"></i>
+                    <p class="font-medium">새 콘텐츠</p>
+                </button>
+                <button class="bg-blue-600 text-white p-4 rounded-xl hover:bg-blue-700 transition">
+                    <i class="fas fa-chart-line text-2xl mb-2"></i>
+                    <p class="font-medium">분석 보기</p>
+                </button>
+                <button class="bg-green-600 text-white p-4 rounded-xl hover:bg-green-700 transition">
+                    <i class="fas fa-users text-2xl mb-2"></i>
+                    <p class="font-medium">팀 초대</p>
+                </button>
+                <button class="bg-yellow-600 text-white p-4 rounded-xl hover:bg-yellow-700 transition">
+                    <i class="fas fa-book text-2xl mb-2"></i>
+                    <p class="font-medium">가이드</p>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Weekly Activity Chart
+        const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+        new Chart(weeklyCtx, {
+            type: 'line',
+            data: {
+                labels: ['월', '화', '수', '목', '금', '토', '일'],
+                datasets: [{
+                    label: '블로그 포스트',
+                    data: [12, 19, 15, 25, 22, 30, 28],
+                    borderColor: 'rgb(147, 51, 234)',
+                    backgroundColor: 'rgba(147, 51, 234, 0.1)',
+                    tension: 0.4
+                }, {
+                    label: 'SNS 변환',
+                    data: [25, 35, 30, 45, 38, 52, 47],
+                    borderColor: 'rgb(59, 130, 246)',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Platform Distribution Chart
+        const platformCtx = document.getElementById('platformChart').getContext('2d');
+        new Chart(platformCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['네이버', '티스토리', '워드프레스', 'Instagram', 'Threads', '기타'],
+                datasets: [{
+                    data: [35, 25, 20, 10, 7, 3],
+                    backgroundColor: [
+                        'rgb(34, 197, 94)',
+                        'rgb(251, 146, 60)',
+                        'rgb(59, 130, 246)',
+                        'rgb(236, 72, 153)',
+                        'rgb(147, 51, 234)',
+                        'rgb(156, 163, 175)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
